@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  form.form-horizontal(action="/upload" method="post" enctype="multipart/form-data")
+    div.form-group.row
+      label.col-2.col-form-label File Origin
+      div.col-5
+        select.form-control
+          option(selected="selected")
+          option(value="1") RichClient
+          option(value="2") MobClient
+          option(value="3") Shared (between RichClient and MobClient
+          option(value="4") Backend
+    div.form-group.row
+      label.col-2.col-form-label Release Name
+      div.col-5
+        input.form-control(name="releaseName" id="releaseName")
+    div.form-group.row
+      label.col-2.col-form-label Version Control Revision #
+      div.col-5
+        input.form-control(name="vcRevisionNumber" id="vcRevisionNumber")
+    div.form-group.row
+      label.col-2.col-form-label Upload File
+      div.col-5
+        input.form-control(type="file" name="propertyFile" id="propertyFile")
+
+
+    button.btn.btn-primary(type="submit" name="submit") Submit

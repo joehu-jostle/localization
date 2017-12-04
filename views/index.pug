@@ -14,7 +14,9 @@ block content
     div.form-group.row
       label.col-2.col-form-label Release Name
       div.col-5
-        input.form-control(name="releaseName" id="releaseName")
+        select.form-control(name="releaseName" id="releaseName")
+          each val in releaseNames
+            option(value=val.name)=val.name
     div.form-group.row
       label.col-2.col-form-label Version Control Revision #
       div.col-5

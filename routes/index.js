@@ -6,7 +6,20 @@ var readLine = require('readline');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+    if (req.mysqlConnection) {
+        var getReleaseNames = 'select * from ReleaseName order by `order`';
+        req.mysqlConnection.query(getReleaseNames, function(err, result, fiels) {
+            if (result) {
+                res.render('index', {
+                    title: 'Localization',
+                    releaseNames: result
+                });
+            }
+        })
+    } else {
+        res.render('index', {title: 'Localization'});
+    }
+
 });
 
 router.post('/upload', function (req, res, next) {

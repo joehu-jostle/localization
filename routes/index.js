@@ -32,20 +32,40 @@ router.post('/upload', function (req, res, next) {
                     input: fs.createReadStream(path),
                     console: false
                 });
-                readFileLineByLine.on('line', function(line) {
-                    var parts = line.split('=');
-                    var key = parts[0];
-                    var value = parts[1];
+                var lineNumberCounter = 1;
+                var lineContentValues = [];
 
-                });
-                fs.unlink(path, function(err) {
-                    if (err) throw err;
+                readFileLineByLine.on('line', function(line) {
+                    line = line.trim();
+                    var contentType = "comment";
+                    if (!line.startsWith("#") && !line.startsWith("!") && line.indexOf("=") > 0) {
+                        contentType = "localizedString";
+                    }
+                    var keyName = null;
+                    var value = null;
+                    var version = 1;
+                    if (contentType == "localizedString") {
+                        var parts = line.split('=');
+                        keyName = parts[0];
+                        value = parts[1];
+                    }
+                    lineContentValues.push([fields.fileOrigin, fields.language, line, lineNumberCounter, fields.releaseName,
+                        fields.vcRevisionNumber, contentType, keyName, value, version]);
+                    lineNumberCounter++;
+                }).on('close', function() {
+                    var insertIntoLineContentQuery = "insert into LineContent (fileOrigin, lang, `content`, lineNumber, "
+                        + "releaseName, vcRevisionNumber, contentType, keyName, `value`, version) values ? ";
+                    req.mysqlConnection.query(insertIntoLineContentQuery, [lineContentValues], function(err, result) {
+                        if (err) throw err;
+                        fs.unlink(path, function(err) {
+                            if (err) throw err;
+                            res.redirect('/');
+                        });
+                    });
                 });
             }
         }
     });
-
-    res.redirect('/');
 });
 
 

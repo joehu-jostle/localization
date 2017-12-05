@@ -5,16 +5,23 @@ block content
     div.form-group.row
       label.col-2.col-form-label File Origin
       div.col-5
-        select.form-control
+        select.form-control(name="fileOrigin" id="fileOrigin")
           option(selected="selected")
           option(value="1") RichClient
           option(value="2") MobClient
           option(value="3") Shared (between RichClient and MobClient
           option(value="4") Backend
     div.form-group.row
+      label.col-2.col-form-label Language
+      div.col-5
+        select.form-control(name="language" id="language")
+          option(value="en") English
+          option(value="fr") French
+    div.form-group.row
       label.col-2.col-form-label Release Name
       div.col-5
         select.form-control(name="releaseName" id="releaseName")
+          option(selected="selected")
           each val in releaseNames
             option(value=val.name)=val.name
     div.form-group.row

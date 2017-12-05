@@ -11,13 +11,15 @@ create table LineContent (
     lineNumber int not null,
     releaseName varchar(25) not null,
     vcRevisionNumber varchar(100) not null,
-    contentType varchar(10) not null,
-    keyName varchar(100),
+    contentType varchar(20) not null,
+    keyName varchar(200) binary,
     `value` varchar(2000),
     version int not null,
     foreign key (releaseName) references ReleaseName(`name`),
-    constraint UC_KeyName Unique (keyName)
+    constraint UC_KeyName Unique (fileOrigin, lang, keyName)
 ) engine=INNODB;
+
+
 
 
 

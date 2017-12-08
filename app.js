@@ -9,6 +9,7 @@ var mysql = require('mysql');
 var index = require('./routes/index');
 var addReleases = require('./routes/addReleases');
 var showDuplicates = require('./routes/showDuplicates');
+var search = require('./routes/search');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use(function(req, res, next) {
 app.use('/', index);
 app.use('/addReleases', addReleases);
 app.use('/showDuplicates', showDuplicates);
+app.use('/search', search);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

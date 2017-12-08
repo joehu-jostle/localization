@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    div.container-fluid
+        div.row(style="height: 80vh")
+            div.col-3(style="border-right: 1px solid grey")
+                form(action="/search/searchString" method="post")
+                    div.form-group.row
+                        labe.col-3.col-form-label Search String
+                        div.col-9
+                            input.form-control(name="searchString" id="searchString")
+                    div.form-group.row
+                        labe.col-3.col-form-label Search In
+                        div.col-9
+                            select.form-control(name="searchIn" id="searchIn")
+                                option(value="keyAndValue") Both keys and values
+                                option(value="key") Key only
+                                option(value="value") Value only
+                    div.form-group.row
+                        label.col-3.col-form-label Language
+                        div.col-9
+                            select.form-control(name="language" id="language")
+                                option(value="all") All
+                                option(value="en") English
+                                option(value="fr") French
+                    button.btn.btn-primary(type="submit") Search
+            div.col-9
+                if result.length > 0
+                    table
+                        tr
+                            th Key Name
+                            th Value
+                        each row in result
+                            tr
+                                td=row.keyName
+                                td=row.value
+
+                else
+                    span Hello

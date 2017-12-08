@@ -8,7 +8,7 @@ html
   body
     div.container-fluid
       div.row(style="height: 80vh;")
-        div.col-2
+        div.col-2(style='border-right: 1px solid black')
           ul.nav.flex-sm-column
             li.nav-item
               a.nav-link(href="/") Process properties file
@@ -16,5 +16,7 @@ html
               a.nav-link(href="/addReleases") Add Releases
             li.nav-item
               a.nav-link(href="/showDuplicates") Show duplicates
+            li.nav-item
+              a.nav-link(href="/search") Search strings
         div.col-10
           block content

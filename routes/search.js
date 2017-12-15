@@ -40,7 +40,7 @@ router.post("/searchString", function(req, res, next) {
             whereClause = "";
          }
 
-         whereClause += " lang in ? ";
+         whereClause += " lang = ? ";
          whereClauseParameters.push(language);
       }
 

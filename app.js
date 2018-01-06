@@ -10,6 +10,7 @@ var index = require('./routes/index');
 var addReleases = require('./routes/addReleases');
 var showDuplicates = require('./routes/showDuplicates');
 var search = require('./routes/search');
+var translate = require('./routes/translate');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/', index);
 app.use('/addReleases', addReleases);
 app.use('/showDuplicates', showDuplicates);
 app.use('/search', search);
+app.use('/translate', translate);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

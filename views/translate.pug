@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    form.form-horizontal(action="/translate/submit" method="post")
+        div.form-group.row
+            label.col-2.col-form-label English
+            div.col-4
+                input.form-control(name="en" id="en")
+
+        div.form-group.row
+            label.col-2.col-form-label To Language
+            div.col-4
+                select.form-control(name="toLanguage" id="toLanguage")
+                    option(value="fr") French
+                    option(value="es") Spanish
+                    option(value="de") German
+                    option(value="ja") Japanese
+                    option(value="nl") Dutch
+                    option(value="pt_BR") Portuguese
+
+        if translated
+            div.form-group.row
+                label.col-2.col-form-label Translation
+                div.col-4
+                    div=translated
+
+        button.btn.btn-primary(type=submit) Translate
